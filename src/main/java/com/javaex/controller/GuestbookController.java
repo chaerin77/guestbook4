@@ -41,6 +41,7 @@ public class GuestbookController{
 		
 	}
 	
+	
 	@RequestMapping(value="/addList", method= {RequestMethod.GET, RequestMethod.POST})
 	public String addList(@ModelAttribute GuestbookVo gVo) {
 		System.out.println("addList");
@@ -49,6 +50,7 @@ public class GuestbookController{
 		return "redirect:/guest/list";
 	}
 
+	
 	@RequestMapping(value="/deleteForm", method= {RequestMethod.GET, RequestMethod.POST})
 	public String deleteForm(Model model, @RequestParam("no")int no) {
 		System.out.println("deleteForm");
@@ -57,10 +59,12 @@ public class GuestbookController{
 		return "deleteForm"; //  /web-inf/views/deleteForm.jsp
 	}
 
+	
 	@RequestMapping(value="/delete", method= {RequestMethod.GET, RequestMethod.POST})
-	public String delete(@RequestParam("no") int no) {
+	public String delete(@RequestParam("no") int no,
+						 @RequestParam("password") String password) {
 		
-		guestbookDao.deleteGuest1(no);
+		guestbookDao.deleteGuest(no,password);
 		
 		return "redirect:/guest/list";
 	}

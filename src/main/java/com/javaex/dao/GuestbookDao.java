@@ -8,59 +8,42 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.javaex.vo.GuestbookVo;
 
-//아 이거까먹음;
 @Repository
 public class GuestbookDao {
 	
-	//필드
-	// 0. import java.sql.*;
-	Connection conn = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
+	@Autowired
+	SqlSession sqlSession;
 	
-	//생성자
-	
-	//메소드 g/s
-	
-	//메소드 일반
-	
-	public void getConnection() {
-		try {
-			// 1. JDBC 드라이버 (Oracle) 로딩
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			
-			// 2. Connection 얻어오기
-			String url = "jdbc:oracle:thin:@localhost:1521:xe";
-			conn = DriverManager.getConnection(url, "webdb", "webdb");
-		} catch (ClassNotFoundException e) {
-			System.out.println("error: 드라이버 로딩 실패 - " + e);
-		} catch (SQLException e) {
-			
-		}
+	public List<GuestbookVo> getList(){
+		System.out.println("getList");
+		List<GuestbookVo> guestbookList = sqlSession.selectList("guestbook.getList");
+		
+		return guestbookList; 
 	}
 	
-	public void close() {
-		// 5. 자원정리
-		try {
-			if (rs != null) {
-				rs.close();
-			} 
-		if (pstmt != null) {
-			pstmt.close();
-			}
-		if (conn != null) {
-			conn.close();
-			}
-		} catch (SQLException e) {
-			System.out.println("error:" + e);
-		}		
+	public int addGuest(GuestbookVo gvo) {
+		
+		int count = sqlSession.insert("guestbook.insert", gvo);
+		
+		return count;
 	}
 	
 	
+	public int deleteGuest(int no, String password) {
+		GuestbookVo gvo = new GuestbookVo(no, password);//no, password 생성자vo에 만들어줌
+		
+		int count = sqlSession.delete("guestbook.", gvo);
+				
+		return count;
+	}
+	
+	/*
 	//리스트 가져오기 메소드
 	public List<GuestbookVo> getList(){ //이메소드 쓰면 db에있는 데이터 갖고와서 addlist.jsp에 줄겨 리턴형 뭘로할지 고민. -list로 오면 좋겠지. 
 		//번호 이름 날짜 본문을 담고있는 데이터들갖고와야하는데 <> 요안에 있는애들은 vo..Vo클래스 만들러갔다옴
@@ -249,6 +232,6 @@ public class GuestbookDao {
 		close();
 		
 		return gvo;
-	}
+	}*/
 	
 }

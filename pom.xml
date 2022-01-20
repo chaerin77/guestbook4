@@ -10,7 +10,7 @@
 	<properties>
 		<org.springframework-version>4.3.3.RELEASE</org.springframework-version>
 	</properties>
-	
+
 	<dependencies>
 		<!-- spring container(core) -->
 		<dependency>
@@ -43,6 +43,26 @@
 			<groupId>com.oracle.database.jdbc</groupId>
 			<artifactId>ojdbc6</artifactId>
 			<version>11.2.0.4</version>
+		</dependency>
+
+		<!-- spring jdbc -->
+		<!-- 220120 추가 속도개선 컨넥션 풀 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		
+		<!-- Mybatis -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.2.0</version>
 		</dependency>
 
 	</dependencies>
