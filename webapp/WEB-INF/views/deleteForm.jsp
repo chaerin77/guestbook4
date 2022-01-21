@@ -13,7 +13,7 @@
 		비밀번호<input type="password" name="password" value="">
 		<button type="submit">확인</button><br>
 		<a href="/guestbook4/guest/List">메인으로 돌아가기</a><br>
-		<input type="hidden" name="no" value="${dno}">
+		<input type="hidden" name="no" value="${No}">
 	  </form> 
 </body>
 </html>

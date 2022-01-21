@@ -25,6 +25,20 @@
 		]]>	
 	</insert>
 	
+	
+	<!-- 번호(no)가__인 사람의 정보 가져오기 -->
+	<select id="selectPerson" parameterType="int" resultType="com.javaex.vo.GuestbookVo">
+		<![CDATA[
+			select no,
+       			   name,
+       			   password,
+      			   content,
+     			   to_char(reg_date, 'yyyy-mm-dd hh:mi:ss') regDate
+			from guestbook
+			where no = #{no}
+		]]>
+	</select>
+	
 	<!-- 정보 삭제하기 -->
 	<delete id="delete" parameterType="com.javaex.vo.GuestbookVo">
 		<![CDATA[
